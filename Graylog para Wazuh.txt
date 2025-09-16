@@ -1,0 +1,60 @@
+Excelente, Said! A informação de que seu SO é AlmaLinux e a saída do `dnf search openjdk` são muito claras e úteis!
+
+A boa notícia é que seu AlmaLinux tem o **OpenJDK 21** disponível nos repositórios, o que é uma versão LTS (Long Term Support) e mais do que suficiente para compilar o plugin do Graylog.
+
+Vamos aos comandos corretos para instalar o JDK 21 e o Maven:
+
+### Passo 1: Instalar o JDK 21 (Java Development Kit)
+
+Use o comando `dnf install` com o nome exato do pacote que você encontrou:
+
+```bash
+sudo dnf install java-21-openjdk-devel.x86_64
+```
+
+Ou, como o `dnf` geralmente resolve a arquitetura, você pode tentar a versão mais curta:
+
+```bash
+sudo dnf install java-21-openjdk-devel
+```
+
+### Passo 2: Instalar o Maven
+
+O Maven é a ferramenta de build que vamos usar.
+
+```bash
+sudo dnf install maven
+```
+
+### Passo 3: Verificar as Instalações
+
+Após a instalação, você pode verificar se o Java e o Maven foram instalados corretamente:
+
+```bash
+java -version
+mvn -version
+```
+
+A saída de `java -version` deve mostrar algo como "openjdk version "21..."", e `mvn -version` deve mostrar a versão do Maven.
+
+### Próximos Passos (Continuando de onde paramos)
+
+Depois de ter o JDK 21 e o Maven instalados, você pode continuar com os passos que descrevi anteriormente para compilar o plugin:
+
+1.  **Clonar o repositório do plugin:**
+    ```bash
+    git clone https://github.com/wizecore/graylog2-output-syslog.git
+    ```
+2.  **Navegar até o diretório do projeto:**
+    ```bash
+    cd graylog2-output-syslog
+    ```
+3.  **Compilar o plugin:**
+    ```bash
+    mvn package
+    ```
+4.  **Localizar o `.jar` gerado:**
+    O arquivo `.jar` estará em `target/`.
+5.  **Transferir o `.jar` para o Graylog e reiniciar.**
+
+Com esses passos, você conseguirá compilar o plugin e deixá-lo pronto para ser carregado pelo Graylog.
